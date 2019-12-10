@@ -5,32 +5,17 @@
  */
 package sec.project.domain;
 
-import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
-
-@Entity
-@Table(name = "Message")
-public class Message extends AbstractPersistable<Long> {
-    @Column(name = "text")
-    private String text;
-    @Column(name = "user")
+/**
+ *
+ * @author ossij
+ */
+public class Message {
     private String user;
+    private String message;
     
-
-
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
+    public Message(String user, String message) {
+        this.user = user;
+        this.message = message;
     }
 
     public String getUser() {
@@ -41,7 +26,13 @@ public class Message extends AbstractPersistable<Long> {
         this.user = user;
     }
 
-    
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
     
     
     

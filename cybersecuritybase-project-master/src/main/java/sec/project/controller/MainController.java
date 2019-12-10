@@ -18,43 +18,43 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import sec.project.domain.Account;
+import sec.project.config.MessageService;
 import sec.project.domain.Message;
-import sec.project.repository.AccountRepository;
-import sec.project.repository.MessageRepository;
 
 @Controller
 public class MainController {
-
+    @Autowired
+    MessageService service;
     
     @Autowired
-    AccountRepository accountRepository;
+    LoginController logInController;
+    
     @Autowired
-    MessageRepository messageRepository;
+    AuthenticationManager authManager;
     
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String loadMessages(Model model) throws SQLException {
-        List<Message> list = new ArrayList<>();
         
-        list = messageRepository.findAll();
-       
-        List<String> list2 = new ArrayList<>();
-        for (Message m: list) {
-            list2.add(m.getText());
+        
+        
+        
+        List<Message> messageList = service.getMessages();
+        List<String> messages = new ArrayList<>();
+        for (Message m: messageList) {
+            messages.add(m.getUser() + ": " + m.getMessage());
         }
-        model.addAttribute("list", list2);
+        
+        model.addAttribute("list", messages);
         
         return "main";
     }
     
     @RequestMapping(value = "/main", method = RequestMethod.POST)
     public String sendMessage(@RequestParam String message) throws SQLException {
-        
-        Message m = new Message();
-        m.setUser("o");
-        m.setText("A");
-        messageRepository.save(m);
-        
+        //tänne, että pitää authenticatea
+        String user = logInController.getLoggedIn();
+        if(user != null)
+        service.sendMessage(user, message);
 
         
         

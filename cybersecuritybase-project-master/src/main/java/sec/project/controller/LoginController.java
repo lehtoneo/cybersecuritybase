@@ -20,15 +20,17 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import org.springframework.web.bind.annotation.RequestParam;
 import sec.project.config.CustomUserDetailsService;
 import sec.project.domain.Account;
-import sec.project.repository.AccountRepository;
 
 @Controller
 public class LoginController {
-
+    private String loggedIn = null;
+    @Autowired
+    AuthenticationManager authManager;
+    
+    @Autowired
+    private CustomUserDetailsService service;
     @Autowired
     MainController mainController;
-    
-    
     @RequestMapping("*")
     public String defaultMapping() {
         return "redirect:/login";
@@ -37,7 +39,7 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loadLogin() {
         
-        
+
         
         
         
@@ -48,9 +50,25 @@ public class LoginController {
     public String submitLogin(@RequestParam String name, @RequestParam String password) throws SQLException {
         
         
+        
+        
+        
+        if(service.userNameAndPasswordMatch(name, password)) {
             
+            loggedIn = name;
+            
+            
+            System.out.println("jea");
             return "redirect:/main";
-       
+        }
+      
+      
+      
+        return "redirect:/login";
+    }
+    
+    public String getLoggedIn() {
+        return loggedIn;
+    }
 
-}
 }
