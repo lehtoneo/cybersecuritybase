@@ -1,0 +1,24 @@
+2019-12-10 14:01:06 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "MESSAGES" already exists; SQL statement:
+CREATE TABLE Messages (message varchar, username varchar(30)) [42101-193]
+2019-12-10 14:01:06 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USERS" already exists; SQL statement:
+CREATE TABLE Users (username varchar(30), password varchar(30), PRIMARY KEY(username)) [42101-193]
+2019-12-10 14:31:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "MESSAGES" already exists; SQL statement:
+CREATE TABLE Messages (message varchar, username varchar(30)) [42101-193]
+2019-12-10 14:31:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USERS" already exists; SQL statement:
+CREATE TABLE Users (username varchar(30), password varchar(30), PRIMARY KEY(username)) [42101-193]
+2019-12-10 14:42:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "MESSAGES" already exists; SQL statement:
+CREATE TABLE Messages (message varchar, username varchar(30)) [42101-193]
+2019-12-10 14:42:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USERS" already exists; SQL statement:
+CREATE TABLE Users (username varchar(30), password varchar(30), PRIMARY KEY(username)) [42101-193]
+2019-12-10 14:42:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "MESSAGES" already exists; SQL statement:
+CREATE TABLE Messages (message varchar, username varchar(30)) [42101-193]
+2019-12-10 14:42:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "USERS" already exists; SQL statement:
+CREATE TABLE Users (username varchar(30), password varchar(30), PRIMARY KEY(username)) [42101-193]

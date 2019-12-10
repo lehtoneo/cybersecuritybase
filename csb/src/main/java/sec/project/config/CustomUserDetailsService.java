@@ -3,6 +3,7 @@ package sec.project.config;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -55,7 +56,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     
     
     public boolean saveUserToDB(String username, String password) throws SQLException {
-        
+        System.out.println("OEE");
         Connection connection = DriverManager.getConnection("jdbc:h2:file:./database", "sa", "");
         
         ResultSet rs = connection.createStatement().executeQuery("SELECT * FROM Users WHERE Username = '" + username + "'");
@@ -76,8 +77,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     public boolean userNameAndPasswordMatch(String username, String password) throws SQLException {
         Connection connection = DriverManager.getConnection("jdbc:h2:file:./database", "sa", "");
         
-        //password' OR 1=1;--
-        ResultSet rs = connection.createStatement().executeQuery("SELECT * FROM Users WHERE Username = '" + username+ "' AND Password ='" + password+"'");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Users WHERE Username = ? AND Password = ? ");
+        stmt.setString(1, username);
+        stmt.setString(2, password);
+        ResultSet rs = stmt.executeQuery();
         
         
         

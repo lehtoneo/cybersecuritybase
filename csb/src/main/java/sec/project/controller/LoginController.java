@@ -26,7 +26,7 @@ public class LoginController {
     private String loggedIn = null;
     @Autowired
     AuthenticationManager authManager;
-    
+
     @Autowired
     private CustomUserDetailsService service;
     @Autowired
