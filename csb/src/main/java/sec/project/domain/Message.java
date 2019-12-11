@@ -5,25 +5,32 @@
  */
 package sec.project.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
 /**
  *
  * @author ossij
  */
+@Entity
 public class Message {
-    private String user;
+    
+    @Column
+    private String username;
+    @Column
     private String message;
     
     public Message(String user, String message) {
-        this.user = user;
+        this.username = user;
         this.message = message;
     }
 
     public String getUser() {
-        return user;
+        return username;
     }
 
     public void setUser(String user) {
-        this.user = user;
+        this.username = user;
     }
 
     public String getMessage() {
