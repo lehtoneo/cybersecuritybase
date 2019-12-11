@@ -33,38 +33,12 @@ public class LoginController {
     MainController mainController;
     @RequestMapping("*")
     public String defaultMapping() {
-        return "redirect:/login";
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loadLogin() {
-        
-
-        
-        
-        
         return "login";
     }
-
-    @RequestMapping(value = "/login", method = POST)
-    public String submitLogin(@RequestParam String name, @RequestParam String password) throws SQLException {
-        
-        
-        
-        
-        
-        if(service.userNameAndPasswordMatch(name, password)) {
-            
-            loggedIn = name;
-            
-            
-            System.out.println("jea");
-            return "redirect:/main";
-        }
-      
-      
-      
-        return "redirect:/login";
+    
+    @RequestMapping("/perform_login")
+    public String logins(@RequestParam String username, @RequestParam String password) {
+        return "redirect:/main";
     }
     
     public String getLoggedIn() {

@@ -7,18 +7,19 @@ package sec.project.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
-/**
- *
- * @author ossij
- */
 @Entity
-public class Message {
+public class Message extends AbstractPersistable<Long>{
     
     @Column
     private String username;
     @Column
     private String message;
+    
+    public Message() {
+        super();
+    }
     
     public Message(String user, String message) {
         this.username = user;

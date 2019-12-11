@@ -7,25 +7,44 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import org.h2.tools.RunScript;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import sec.project.domain.Account;
+import sec.project.repository.AccountRepository;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private Map<String, String> accountDetails;
+    @Autowired
+    UserDetailsService userDetailsService;
+    @Autowired
+    PasswordEncoder encoder;
+    @Autowired
+    AccountRepository accRep;
 
     @PostConstruct
     public void init() throws SQLException {
+        
+    accRep.save(new Account("admin", encoder.encode("admin")));
+    List<Account> list = accRep.findAll();
+    
+        for (Account acc: list) {
+            System.out.println(acc.getName() + " " + acc.getPassword());
+        }
 
     }
     
@@ -37,21 +56,20 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        
-        
-        
-        if (!this.accountDetails.containsKey(username)) {
+        Account account = accRep.findByUsername(username);
+        if (account == null) {
             throw new UsernameNotFoundException("No such user: " + username);
         }
-
+        System.out.println("??");
+        System.out.println(account.getName());
         return new org.springframework.security.core.userdetails.User(
-                username,
-                this.accountDetails.get(username),
+                account.getName(),
+                account.getPassword(),
                 true,
                 true,
                 true,
                 true,
                 Arrays.asList(new SimpleGrantedAuthority("USER")));
+    
     }
 }

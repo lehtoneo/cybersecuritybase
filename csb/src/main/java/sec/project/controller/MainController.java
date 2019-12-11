@@ -18,16 +18,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import sec.project.config.MessageService;
+import sec.project.domain.Account;
 import sec.project.domain.Message;
+import sec.project.repository.AccountRepository;
+import sec.project.repository.MessageRepository;
 
 @Controller
 public class MainController {
+
     @Autowired
-    MessageService service;
-    
+    AccountRepository accRep;
     @Autowired
     LoginController logInController;
+    
+    @Autowired
+    MessageRepository messageRep;
     
     @Autowired
     AuthenticationManager authManager;
@@ -35,12 +40,11 @@ public class MainController {
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String loadMessages(Model model) throws SQLException {
         
+        List<Message> list = messageRep.findAll();
         
-        
-        
-        List<Message> messageList = service.getMessages();
         List<String> messages = new ArrayList<>();
-        for (Message m: messageList) {
+        
+        for (Message m: list) {
             messages.add(m.getUser() + ": " + m.getMessage());
         }
         
@@ -50,14 +54,12 @@ public class MainController {
     }
     
     @RequestMapping(value = "/main", method = RequestMethod.POST)
-    public String sendMessage(@RequestParam String message) throws SQLException {
+    public String sendMessage(Authentication authentication, @RequestParam String message) throws SQLException {
         //tänne, että pitää authenticatea
-        String user = logInController.getLoggedIn();
-        if(user != null)
-        service.sendMessage(user, message);
+        Account acc = accRep.findByUsername(authentication.getName());
+        
+        messageRep.save(new Message(acc.getName(), message));
 
-        
-        
         return "redirect:/main";
     }
     

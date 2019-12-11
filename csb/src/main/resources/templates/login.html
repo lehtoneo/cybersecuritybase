@@ -7,8 +7,8 @@
 
         <h1>Sign up to the event using this form</h1>
 
-        <form action="#" th:action="@{/login}" method="POST">
-            <p><label for="name">Name</label>: <input type="text" name="name" id="name"/></p>
+        <form name="login" th:action="@{/login}" method="POST">
+            <p><label for="name">Name</label>: <input type="text" name="username" id="username"/></p>
             <p><label for="address">Password</label>: <input type="password" name="password" id="password"/></p>
             <p><input type="submit" value="Submit" /></p>
         </form>
