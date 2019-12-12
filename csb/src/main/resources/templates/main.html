@@ -5,6 +5,14 @@
     </head>
     <body>
         
+        <button type="submit"  onClick="refreshPage()">Refresh messages</button>
+        
+        <script>
+            function refreshPage(){
+                window.location.reload();
+                }    
+        </script>
+        
 
         <form action="#" th:action="@{/main}" method = "post">
             <p><label for="Message">Message</label>: <input type="text" name="message" id="message"/></p>
