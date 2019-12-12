@@ -6,7 +6,9 @@ Link to repository: <https://github.com/lehtoneo/cybersecuritybase>
 ## 1.	BROKEN AUTHENTICATION
 The first flaw of many in my application is broken authentication, which is OWASP top 10-list’s number 2 security flaw. 
 In the application, you can easily use for example OWASP zap to brute force passwords. First, you can create your own user to the app, and take a look at some registered user (who have sent messages). After that, you can just brute force password field as you know registered users. 
+
 How to fix: 
+
 It’s not the simplest fix. You could for example add limits to how many times one can try to log in to a user before the user is locked. After the user is logged, it could be unlocked by some kind of email verification. However, that requires a lot of code refactoring. Another fix is a bit more straightforward. One could add requirements to password strength. 
 ## 2.	CROSS-SITE SCRIPTING
 The second flaw is OWASP top-10-list’s number 7 flaw, which is CROSS-SITE SCRIPTING. 
