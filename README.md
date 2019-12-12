@@ -21,11 +21,11 @@ Go to main.html and change “th:utext=..” to th:text, on row 22. You could ad
 
 ### 3.	BROKEN ACCESS CONTROL
 Broken access control is OWASP top 10-list’s number 5 flaw. To put it simply, the flaw means that attacker can gain access to data/pages they should not be able to access. For example, normal user (attacker) gains admin rights somehow, or is able to view data which should be only available for real admins. In this app, the access control is completely messed up.
-The application contains html file “admin.html”. The page should only be accessible for the user “admin”, but at the moment, any authenticated user can visit the page by simply logging in and visiting page < http://localhost:8080/admin>. 
+The application contains html file “admin.html”. The page should only be accessible for the user “admin”, but at the moment, any authenticated user can visit the page by simply logging in and visiting page http://localhost:8080/admin. 
 
 How to fix:
 
-Spring SecurityConfiguration class offers quite good tools to fix this problem. One can simply edit the configure(HttpSecurity)-method so that only admins can access certain page. To see how: go to my GitHub repository and view the fixAdminRights1-picture in the “pictures” directory. Problem is now that even admin can’t visit the page, since the admin hasn’t been given admin rights. One can simply fix this by editing CustomUserDetailsService-class’s loadByUserName(username) method. To see how: go to my GitHub repository and view the fixAdminRights2-picture in the “pictures” directory. 
+Spring SecurityConfiguration class offers quite good tools to fix this problem. One can simply edit the configure(HttpSecurity)-method so that only admins can access certain page. To see how: go to my GitHub repository and view the fixAdminRights1-picture in the “pictures” directory. Problem is now that even admin can’t visit the page, since the admin hasn’t been given admin rights. One can simply fix this by editing CustomUserDetailsService-class’s loadByUserName(username) method. To see how: [click here](https://github.com/lehtoneo/cybersecuritybase/blob/master/pictures/fixAdminrights1.png).
 ### 4.	SENSITIVE DATA EXPOSURE
 OWASP top 10-list’s #3 flaw is Sensitive data exposure. According to OWASP top-10 article, one of the reasons to sensitive data exposure is missing protection on data at rest, which is also problem in this application. 
 When adding sensitive data to database, it should be encrypted. When this app saves passwords to database, they are not encrypted at all. You can see this by viewing GreatPasswordEncoder class in the repository. This means that if attacker somehow gains access to database, he or she has all of the user information. 
