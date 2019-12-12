@@ -29,11 +29,12 @@ public class LoginController {
 
     @Autowired
     private CustomUserDetailsService service;
+    
     @Autowired
     MainController mainController;
     @RequestMapping("*")
     public String defaultMapping() {
-        return "main";
+        return "login";
     }
     
     @RequestMapping("/perform_login")

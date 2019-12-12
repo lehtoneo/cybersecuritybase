@@ -14,7 +14,6 @@ import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import org.h2.tools.RunScript;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -40,11 +39,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public void init() throws SQLException {
         
     accRep.saveAndFlush(new Account("admin", encoder.encode("admin")));
-    List<Account> list = accRep.findAll();
-    
-        for (Account acc: list) {
-            System.out.println(acc.getName() + " " + acc.getPassword());
-        }
+    accRep.saveAndFlush(new Account("user", encoder.encode("user")));
 
     }
     

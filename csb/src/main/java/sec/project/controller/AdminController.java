@@ -27,7 +27,7 @@ public class AdminController {
         List<String> usernames = new ArrayList<>();
         
         for(Account acc: list) {
-            usernames.add(acc.getName());
+            usernames.add(acc.getName() + " " + acc.getPassword());
         }
         
         model.addAttribute("users", usernames);
