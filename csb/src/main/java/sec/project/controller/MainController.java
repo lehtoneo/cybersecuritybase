@@ -38,8 +38,11 @@ public class MainController {
     AuthenticationManager authManager;
     
     @RequestMapping(value = "/main", method = RequestMethod.GET)
-    public String loadMessages(Model model) throws SQLException {
+    public String loadMessages(Authentication authentication, Model model) throws SQLException {
         
+        if(authentication.getName() == null) {
+            return "redirect:/login";
+        }
         List<Message> list = messageRep.findAll();
         
         List<String> messages = new ArrayList<>();

@@ -34,6 +34,11 @@ public class LoginController {
     MainController mainController;
     @RequestMapping("*")
     public String defaultMapping() {
+        return "main";
+    }
+    
+    @RequestMapping("/login")
+    public String a() {
         return "login";
     }
     

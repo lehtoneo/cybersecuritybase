@@ -22,6 +22,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import sec.project.controller.MainController;
 import sec.project.domain.Account;
 import sec.project.repository.AccountRepository;
 
@@ -34,6 +36,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     PasswordEncoder encoder;
     @Autowired
     AccountRepository accRep;
+    @Autowired
+    MainController mainC;
 
     @PostConstruct
     public void init() throws SQLException {
@@ -55,8 +59,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (account == null) {
             throw new UsernameNotFoundException("No such user: " + username);
         }
-        System.out.println("??");
-        System.out.println(account.getName());
+        
+        
         return new org.springframework.security.core.userdetails.User(
                 account.getName(),
                 account.getPassword(),

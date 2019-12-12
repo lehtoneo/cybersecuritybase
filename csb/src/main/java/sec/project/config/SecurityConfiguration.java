@@ -28,7 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
           http.authorizeRequests().antMatchers("/createacc").permitAll()
           .anyRequest().authenticated()
           .and()
-          .formLogin().loginPage("/login").defaultSuccessUrl("/main").permitAll();
+          .formLogin().loginPage("/login").defaultSuccessUrl("/main.html").permitAll();
           
                 
                 
