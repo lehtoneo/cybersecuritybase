@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Thank you!</title>
+        <title>Chat here</title>
     </head>
     <body>
         
@@ -11,10 +11,11 @@
             <p><input type="submit" value="Send!" /></p>
         </form>
         
-        <ul>
-    <li th:each="item : ${list}">
-        <span th:text="${item}">hello world!</span>
-    </li>
-</ul>
+        <ul id="list">
+            <li th:each="item : ${list}" th:utext="${item}">user name</li>
+        </ul>
+        
+        
+        
     </body>
 </html>

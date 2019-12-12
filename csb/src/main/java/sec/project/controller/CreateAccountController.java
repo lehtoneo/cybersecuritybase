@@ -33,7 +33,7 @@ public class CreateAccountController {
         
         if(accountRepository.findByUsername(name) == null) {
             
-            accountRepository.save(new Account(name, passwordencoder.encode(password)));
+            accountRepository.saveAndFlush(new Account(name, passwordencoder.encode(password)));
             
             return "redirect:/login";
         }

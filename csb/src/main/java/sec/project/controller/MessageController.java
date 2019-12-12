@@ -17,21 +17,6 @@ import sec.project.repository.MessageRepository;
 public class MessageController {
     @Autowired
     MessageRepository messageRep;
-    
-    @RequestMapping(value = "/messages")
-    public String load() {
-        
-        List<Message> list = messageRep.findAll();
-        
-        List<String> messages = new ArrayList<>();
-        
-        for (Message m: list) {
-            messages.add(m.getUser() + ": " + m.getMessage());
-        }
-        
-        return "posts";
-        
-        
-    }
+  
     
 }

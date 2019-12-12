@@ -2,9 +2,11 @@ package sec.project.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
+@Table(name = "Accounts")
 public class Account extends AbstractPersistable<Long> {
 
     @Column

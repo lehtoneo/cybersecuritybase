@@ -58,7 +58,7 @@ public class MainController {
         //tänne, että pitää authenticatea
         Account acc = accRep.findByUsername(authentication.getName());
         
-        messageRep.save(new Message(acc.getName(), message));
+        messageRep.saveAndFlush(new Message(acc.getName(), message));
 
         return "redirect:/main";
     }

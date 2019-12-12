@@ -39,7 +39,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @PostConstruct
     public void init() throws SQLException {
         
-    accRep.save(new Account("admin", encoder.encode("admin")));
+    accRep.saveAndFlush(new Account("admin", encoder.encode("admin")));
     List<Account> list = accRep.findAll();
     
         for (Account acc: list) {

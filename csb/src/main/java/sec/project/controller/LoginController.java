@@ -33,7 +33,7 @@ public class LoginController {
     MainController mainController;
     @RequestMapping("*")
     public String defaultMapping() {
-        return "login";
+        return "main";
     }
     
     @RequestMapping("/perform_login")
